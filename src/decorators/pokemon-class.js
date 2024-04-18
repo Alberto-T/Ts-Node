@@ -61,6 +61,7 @@ define(["require", "exports"], function (require, exports) {
     let Pokemon = class Pokemon {
         constructor(name) {
             this.name = name;
+            //! true o false
             this.publicApi = 'https://pokeapi.co';
         }
         savePokemonToDB(id) {

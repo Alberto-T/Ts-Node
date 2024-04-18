@@ -59,6 +59,7 @@ function readonly( isWritable:boolean = true ): Function {
 @bloquearPrototipo
 @printToConsoleConditional( false )
 export class Pokemon {
+    //! true o false
     @readonly(true)
     public publicApi: string = 'https://pokeapi.co'
     
