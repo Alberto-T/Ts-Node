@@ -9,5 +9,7 @@ define(["require", "exports", "./decorators/pokemon-class"], function (require, 
     const charmander = new pokemon_class_1.Pokemon('Charmander');
     // (Pokemon.prototype as any).customName = 'Pikachu'
     // console.log(charmander.savePokemonToDB( 50 ));
-    charmander.savePokemonToDB(3);
+    // charmander.savePokemonToDB( 3 );
+    charmander.publicApi = 'https://alberto-torres.com';
+    console.log(charmander);
 });

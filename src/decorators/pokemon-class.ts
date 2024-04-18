@@ -22,7 +22,7 @@ function CheckValidPokemonId() {
         // console.log({ target, propertyKey, descriptor });
         // descriptor.value = () => console.log('Hola Mundo');
         const originalMethod = descriptor.value;
-        
+
         descriptor.value = ( id: number ) => {
             if( id < 1 || id > 800 ) {
                 return console.error('El id del pokemon debe de estar entre 1 y 800')
@@ -31,16 +31,35 @@ function CheckValidPokemonId() {
             }
         }
 
-
     }
 }
 
+function readonly( isWritable:boolean = true ): Function {
+    return function( target: any, propertyKey: string ) {
+
+        const descriptor: PropertyDescriptor = {
+            get() {
+                console.log(this);
+                return 'Alberto'
+            },
+            set( this, val ){
+                // console.log(this, val);
+                Object.defineProperty( this, propertyKey, {
+                    value: val,
+                    writable: !isWritable,
+                    enumerable: false
+                } )
+            }
+        }
+        return descriptor;
+    }
+}
 
 
 @bloquearPrototipo
 @printToConsoleConditional( false )
 export class Pokemon {
-    
+    @readonly(true)
     public publicApi: string = 'https://pokeapi.co'
     
     constructor(

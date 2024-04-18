@@ -39,6 +39,25 @@ define(["require", "exports"], function (require, exports) {
             };
         };
     }
+    function readonly(isWritable = true) {
+        return function (target, propertyKey) {
+            const descriptor = {
+                get() {
+                    console.log(this);
+                    return 'Alberto';
+                },
+                set(val) {
+                    // console.log(this, val);
+                    Object.defineProperty(this, propertyKey, {
+                        value: val,
+                        writable: !isWritable,
+                        enumerable: false
+                    });
+                }
+            };
+            return descriptor;
+        };
+    }
     let Pokemon = class Pokemon {
         constructor(name) {
             this.name = name;
@@ -49,6 +68,9 @@ define(["require", "exports"], function (require, exports) {
         }
     };
     exports.Pokemon = Pokemon;
+    __decorate([
+        readonly(true)
+    ], Pokemon.prototype, "publicApi", void 0);
     __decorate([
         CheckValidPokemonId()
     ], Pokemon.prototype, "savePokemonToDB", null);
