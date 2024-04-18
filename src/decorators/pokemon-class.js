@@ -11,6 +11,15 @@ define(["require", "exports"], function (require, exports) {
     function printToConsole(constructor) {
         console.log(constructor);
     }
+    const printToConsoleConditional = (print = false) => {
+        // return () => console.log('Hola Mundo');
+        if (print) {
+            return printToConsole;
+        }
+        else {
+            return () => { };
+        }
+    };
     let Pokemon = class Pokemon {
         constructor(name) {
             this.name = name;
@@ -19,6 +28,6 @@ define(["require", "exports"], function (require, exports) {
     };
     exports.Pokemon = Pokemon;
     exports.Pokemon = Pokemon = __decorate([
-        printToConsole
+        printToConsoleConditional(false)
     ], Pokemon);
 });
