@@ -20,6 +20,10 @@ define(["require", "exports"], function (require, exports) {
             return () => { };
         }
     };
+    const bloquearPrototipo = function (constructor) {
+        Object.seal(constructor);
+        Object.seal(constructor.prototype);
+    };
     let Pokemon = class Pokemon {
         constructor(name) {
             this.name = name;
@@ -28,6 +32,7 @@ define(["require", "exports"], function (require, exports) {
     };
     exports.Pokemon = Pokemon;
     exports.Pokemon = Pokemon = __decorate([
-        printToConsoleConditional(false)
+        bloquearPrototipo,
+        printToConsoleConditional(true)
     ], Pokemon);
 });
