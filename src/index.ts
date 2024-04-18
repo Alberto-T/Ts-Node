@@ -4,6 +4,8 @@
 // import powers from './data/powers';
 
 import { printObject, genericFunction, genericFunctionArrow } from '../generics/generics';
+import { Hero } from './interfaces/hero';
+import { Villain } from './interfaces/villain';
 
 // const ironman = new SuperHero('Ironman', 1, 55);
 // const ironman = new HeroClasses.Hero('Ironman', 1, 55);
@@ -20,9 +22,18 @@ import { printObject, genericFunction, genericFunctionArrow } from '../generics/
 // printObject( [1,2,3,4,5,6,7,8,9,10] );
 // printObject( 'Hola Mundo' );
 
-const name: string = 'Alberto';
+// const name: string = 'Alberto';
 
 
-console.log( genericFunctionArrow(3.141618).toFixed(2) );
-console.log( genericFunctionArrow( name ).toUpperCase() );
-console.log( genericFunctionArrow( new Date() ).getDate() );
+// console.log( genericFunctionArrow(3.141618).toFixed(2) );
+// console.log( genericFunctionArrow( name ).toUpperCase() );
+// console.log( genericFunctionArrow( new Date() ).getDate() );
+
+const deadpool = {
+    name: 'Deadpool',
+    realName: 'Wade Winston Wilson',
+    dangerLevel: 130
+}
+
+console.log( genericFunctionArrow<Villain>(deadpool).dangerLevel );
+
