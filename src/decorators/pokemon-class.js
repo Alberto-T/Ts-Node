@@ -24,15 +24,36 @@ define(["require", "exports"], function (require, exports) {
         Object.seal(constructor);
         Object.seal(constructor.prototype);
     };
+    function CheckValidPokemonId() {
+        return function (target, propertyKey, descriptor) {
+            // console.log({ target, propertyKey, descriptor });
+            // descriptor.value = () => console.log('Hola Mundo');
+            const originalMethod = descriptor.value;
+            descriptor.value = (id) => {
+                if (id < 1 || id > 800) {
+                    return console.error('El id del pokemon debe de estar entre 1 y 800');
+                }
+                else {
+                    return originalMethod(id);
+                }
+            };
+        };
+    }
     let Pokemon = class Pokemon {
         constructor(name) {
             this.name = name;
             this.publicApi = 'https://pokeapi.co';
         }
+        savePokemonToDB(id) {
+            console.log(`Pokemon guardado en DB ${id}`);
+        }
     };
     exports.Pokemon = Pokemon;
+    __decorate([
+        CheckValidPokemonId()
+    ], Pokemon.prototype, "savePokemonToDB", null);
     exports.Pokemon = Pokemon = __decorate([
         bloquearPrototipo,
-        printToConsoleConditional(true)
+        printToConsoleConditional(false)
     ], Pokemon);
 });
